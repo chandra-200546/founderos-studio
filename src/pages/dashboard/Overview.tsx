@@ -29,7 +29,7 @@ export default function Overview() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((s, i) => (
-          <StatCard key={s.label} {...s} delay={i * 0.05} />
+          <StatCard key={s.label} {...s} trend={s.trend as "up" | "down" | "neutral"} delay={i * 0.05} />
         ))}
       </div>
 
