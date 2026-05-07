@@ -6,7 +6,7 @@ import {
   Layout, Megaphone, Filter, BarChart3, Zap, Check, Star, ChevronDown, Menu, Bot, Globe
 } from "lucide-react";
 import { Logo } from "@/components/Logo";
-import { Hero3D, Showcase3D } from "@/components/Hero3D";
+import { Hero3D, PageBackground3D, Step3D, Cta3D, TiltCard } from "@/components/Hero3D";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
