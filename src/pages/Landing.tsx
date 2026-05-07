@@ -370,16 +370,20 @@ export default function Landing() {
       {/* CTA */}
       <section className="py-24">
         <div className="container max-w-[1400px] px-4 lg:px-6">
-          <Card className="relative overflow-hidden glass-strong border-border p-12 lg:p-20 text-center">
+          <Card className="relative overflow-hidden glass-strong border-border p-12 lg:p-20 text-center min-h-[420px]">
             <div className="absolute inset-0 mesh-bg" />
-            <div className="relative">
-              <h2 className="font-display text-3xl lg:text-5xl font-bold tracking-tight mb-4 max-w-3xl mx-auto">
+            <div className="absolute inset-0 opacity-70">
+              <Cta3D />
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background/60 pointer-events-none" />
+            <div className="relative pointer-events-none">
+              <h2 className="font-display text-3xl lg:text-5xl font-bold tracking-tight mb-4 max-w-3xl mx-auto" style={{ textShadow: "0 6px 30px hsl(var(--primary) / 0.4)" }}>
                 Your next business is <span className="gradient-text">one prompt away.</span>
               </h2>
               <p className="text-muted-foreground text-lg mb-8 max-w-xl mx-auto">
                 Stop planning. Start shipping. Let autonomous AI agents do the work.
               </p>
-              <Link to="/signup">
+              <Link to="/signup" className="pointer-events-auto inline-block">
                 <Button size="lg" className="bg-gradient-aurora text-white rounded-full shadow-elegant px-7 h-12">
                   Start Building Free <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
