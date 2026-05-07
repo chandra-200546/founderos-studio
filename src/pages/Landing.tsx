@@ -288,30 +288,34 @@ export default function Landing() {
           <div className="grid md:grid-cols-3 gap-6 mt-12 max-w-5xl mx-auto">
             {plans.map((p, i) => (
               <motion.div key={p.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
-                <Card className={cn("relative p-8 h-full transition-all", p.highlight ? "glass-strong shadow-elegant ring-2 ring-primary/40 scale-[1.02]" : "glass border-border")}>
-                  {p.highlight && (
-                    <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-aurora text-white border-0 shadow-glow">Most popular</Badge>
-                  )}
-                  <div className="font-display font-semibold text-lg mb-1">{p.name}</div>
-                  <div className="text-sm text-muted-foreground mb-4">{p.description}</div>
-                  <div className="flex items-baseline gap-1 mb-6">
-                    <span className="font-display text-5xl font-bold">{p.price}</span>
-                    <span className="text-muted-foreground text-sm">{p.period}</span>
-                  </div>
-                  <ul className="space-y-3 mb-8">
-                    {p.features.map((f) => (
-                      <li key={f} className="flex items-start gap-2 text-sm">
-                        <Check className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                        <span>{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Link to="/signup" className="block">
-                    <Button className={cn("w-full rounded-full", p.highlight ? "bg-gradient-aurora text-white shadow-glow hover:opacity-90" : "")} variant={p.highlight ? "default" : "outline"}>
-                      {p.cta}
-                    </Button>
-                  </Link>
-                </Card>
+                <TiltCard intensity={p.highlight ? 14 : 9}>
+                  <Card className={cn("relative p-8 h-full transition-all", p.highlight ? "glass-strong shadow-elegant ring-2 ring-primary/40 scale-[1.02]" : "glass border-border")}>
+                    {p.highlight && (
+                      <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-aurora text-white border-0 shadow-glow" style={{ transform: "translate(-50%, 0) translateZ(60px)" }}>Most popular</Badge>
+                    )}
+                    <div style={{ transform: "translateZ(40px)" }}>
+                      <div className="font-display font-semibold text-lg mb-1">{p.name}</div>
+                      <div className="text-sm text-muted-foreground mb-4">{p.description}</div>
+                      <div className="flex items-baseline gap-1 mb-6">
+                        <span className="font-display text-5xl font-bold">{p.price}</span>
+                        <span className="text-muted-foreground text-sm">{p.period}</span>
+                      </div>
+                      <ul className="space-y-3 mb-8">
+                        {p.features.map((f) => (
+                          <li key={f} className="flex items-start gap-2 text-sm">
+                            <Check className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                            <span>{f}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <Link to="/signup" className="block">
+                        <Button className={cn("w-full rounded-full", p.highlight ? "bg-gradient-aurora text-white shadow-glow hover:opacity-90" : "")} variant={p.highlight ? "default" : "outline"}>
+                          {p.cta}
+                        </Button>
+                      </Link>
+                    </div>
+                  </Card>
+                </TiltCard>
               </motion.div>
             ))}
           </div>
