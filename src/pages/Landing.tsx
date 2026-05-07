@@ -48,7 +48,9 @@ export default function Landing() {
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden relative">
+      <PageBackground3D />
+      <div className="relative z-[1]">
       {/* Navbar */}
       <header className="fixed top-0 inset-x-0 z-50">
         <div className="container max-w-[1400px] px-4 lg:px-6">
