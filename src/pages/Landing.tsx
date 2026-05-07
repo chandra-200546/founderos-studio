@@ -329,19 +329,23 @@ export default function Landing() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mt-12">
             {testimonials.map((t, i) => (
               <motion.div key={t.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}>
-                <Card className="p-6 glass border-border h-full">
-                  <div className="flex gap-0.5 mb-3">
-                    {[...Array(5)].map((_, i) => <Star key={i} className="h-3.5 w-3.5 fill-warning text-warning" />)}
-                  </div>
-                  <p className="text-sm leading-relaxed mb-4">"{t.quote}"</p>
-                  <div className="flex items-center gap-3 pt-4 border-t border-border">
-                    <div className="h-9 w-9 rounded-full bg-gradient-aurora flex items-center justify-center text-white text-xs font-semibold">{t.avatar}</div>
-                    <div>
-                      <div className="font-medium text-sm">{t.name}</div>
-                      <div className="text-xs text-muted-foreground">{t.role}</div>
+                <TiltCard intensity={10}>
+                  <Card className="p-6 glass border-border h-full">
+                    <div style={{ transform: "translateZ(30px)" }}>
+                      <div className="flex gap-0.5 mb-3">
+                        {[...Array(5)].map((_, i) => <Star key={i} className="h-3.5 w-3.5 fill-warning text-warning" />)}
+                      </div>
+                      <p className="text-sm leading-relaxed mb-4">"{t.quote}"</p>
+                      <div className="flex items-center gap-3 pt-4 border-t border-border">
+                        <div className="h-9 w-9 rounded-full bg-gradient-aurora flex items-center justify-center text-white text-xs font-semibold">{t.avatar}</div>
+                        <div>
+                          <div className="font-medium text-sm">{t.name}</div>
+                          <div className="text-xs text-muted-foreground">{t.role}</div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </Card>
+                  </Card>
+                </TiltCard>
               </motion.div>
             ))}
           </div>
