@@ -227,13 +227,17 @@ export default function Landing() {
               const Icon = f.icon;
               return (
                 <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
-                  <Card className="p-8 glass border-border h-full hover:shadow-elegant transition-all">
-                    <div className="h-12 w-12 rounded-xl bg-gradient-aurora/10 ring-1 ring-primary/20 flex items-center justify-center mb-4">
-                      <Icon className="h-6 w-6 text-primary" />
-                    </div>
-                    <h3 className="font-display font-semibold text-xl mb-2">{f.title}</h3>
-                    <p className="text-muted-foreground">{f.desc}</p>
-                  </Card>
+                  <TiltCard intensity={8}>
+                    <Card className="p-8 glass border-border h-full hover:shadow-elegant transition-all">
+                      <div style={{ transform: "translateZ(50px)" }}>
+                        <div className="h-12 w-12 rounded-xl bg-gradient-aurora/10 ring-1 ring-primary/20 flex items-center justify-center mb-4 shadow-lg">
+                          <Icon className="h-6 w-6 text-primary" />
+                        </div>
+                        <h3 className="font-display font-semibold text-xl mb-2">{f.title}</h3>
+                        <p className="text-muted-foreground">{f.desc}</p>
+                      </div>
+                    </Card>
+                  </TiltCard>
                 </motion.div>
               );
             })}
