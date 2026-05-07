@@ -166,18 +166,19 @@ export default function Landing() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.05 }}
-                  whileHover={{ y: -4 }}
                 >
-                  <Card className="group p-5 h-full glass border-border hover:shadow-elegant transition-all relative overflow-hidden">
-                    <div className={cn("absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gradient-to-br opacity-20 blur-2xl group-hover:opacity-40 transition", a.color)} />
-                    <div className="relative">
-                      <div className={cn("h-10 w-10 rounded-xl bg-gradient-to-br flex items-center justify-center mb-4", a.color)}>
-                        <Icon className="h-5 w-5 text-white" />
+                  <TiltCard intensity={10}>
+                    <Card className="group p-5 h-full glass border-border hover:shadow-elegant transition-all relative overflow-hidden">
+                      <div className={cn("absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gradient-to-br opacity-20 blur-2xl group-hover:opacity-40 transition", a.color)} />
+                      <div className="relative" style={{ transform: "translateZ(40px)" }}>
+                        <div className={cn("h-10 w-10 rounded-xl bg-gradient-to-br flex items-center justify-center mb-4 shadow-lg", a.color)}>
+                          <Icon className="h-5 w-5 text-white" />
+                        </div>
+                        <div className="font-display font-semibold mb-1">{a.name}</div>
+                        <div className="text-sm text-muted-foreground">{a.description}</div>
                       </div>
-                      <div className="font-display font-semibold mb-1">{a.name}</div>
-                      <div className="text-sm text-muted-foreground">{a.description}</div>
-                    </div>
-                  </Card>
+                    </Card>
+                  </TiltCard>
                 </motion.div>
               );
             })}
