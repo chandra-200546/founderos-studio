@@ -82,41 +82,42 @@ export default function Landing() {
         </div>
       </header>
 
-      {/* Hero — 3D */}
-      <section ref={heroRef} className="relative min-h-[100vh] pt-32 pb-24 overflow-hidden">
-        <div className="absolute inset-0 mesh-bg opacity-70" />
-        <div className="absolute inset-0 grid-pattern opacity-20 [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_75%)]" />
+      {/* Hero */}
+      <section ref={heroRef} className="relative pt-36 pb-32 overflow-hidden min-h-screen">
+        <div className="absolute inset-0 mesh-bg opacity-60" />
+        <div className="absolute inset-0 grid-pattern opacity-30 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)]" />
 
-        {/* 3D Canvas — full bleed behind content */}
+        {/* 3D Canvas backdrop */}
         <div className="absolute inset-0 z-0">
           <Hero3D />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background pointer-events-none" />
         </div>
 
         <motion.div style={{ y, opacity }} className="container max-w-[1400px] relative z-10 px-4 lg:px-6 text-center pointer-events-none">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <Badge variant="outline" className="rounded-full px-4 py-1.5 backdrop-blur-md bg-card/50 mb-6 gap-2 pointer-events-auto">
               <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse" />
-              <span className="text-xs">Now with 10 autonomous AI agents · Powered by 3D OS</span>
+              <span className="text-xs">Now with 10 autonomous AI agents</span>
             </Badge>
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="font-display font-bold text-4xl sm:text-6xl lg:text-8xl tracking-tight max-w-5xl mx-auto leading-[1.02]"
-            style={{ textShadow: "0 8px 40px hsl(var(--primary) / 0.35)" }}
+            className="font-display font-bold text-4xl sm:text-6xl lg:text-7xl tracking-tight max-w-5xl mx-auto leading-[1.05]"
+            style={{ textShadow: "0 8px 40px hsl(var(--primary) / 0.3)" }}
           >
-            Build Businesses<br className="hidden sm:block" />
-            in <span className="gradient-text">3D Reality</span>
+            Build, Launch & Optimize <br className="hidden sm:block" />
+            Businesses with{" "}
+            <span className="gradient-text">Autonomous AI Agents</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="mt-6 text-base sm:text-xl text-muted-foreground max-w-2xl mx-auto backdrop-blur-sm"
+            className="mt-6 text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto"
           >
-            FounderOS deploys autonomous AI agents that research, design, build, launch, and optimize entire businesses — visually, in real time.
+            FounderOS researches markets, creates business plans, builds landing pages, generates marketing campaigns, and improves your business — automatically.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -125,72 +126,28 @@ export default function Landing() {
             className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 pointer-events-auto"
           >
             <Link to="/signup">
-              <Button size="lg" className="bg-gradient-aurora hover:opacity-90 text-white rounded-full shadow-elegant px-8 h-14 text-base">
-                Enter the OS <ArrowRight className="ml-2 h-4 w-4" />
+              <Button size="lg" className="bg-gradient-aurora hover:opacity-90 text-white rounded-full shadow-elegant px-7 h-12 text-base">
+                Start Building <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
-            <Button size="lg" variant="outline" className="rounded-full h-14 px-8 text-base backdrop-blur-md bg-card/50">
+            <Button size="lg" variant="outline" className="rounded-full h-12 px-7 text-base backdrop-blur-md bg-card/50">
               <Play className="mr-2 h-4 w-4" /> Watch Demo
             </Button>
           </motion.div>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="mt-6 text-xs text-muted-foreground">
-            Drag the scene · No credit card · Free forever plan
+            No credit card needed · Free forever plan · Cancel anytime
           </motion.div>
         </motion.div>
 
-        {/* Floating glass cards over 3D */}
-        <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity }} className="hidden lg:flex absolute left-8 top-1/3 z-10 glass-strong rounded-2xl px-4 py-3 items-center gap-3 shadow-elegant">
-          <div className="h-8 w-8 rounded-lg bg-gradient-aurora grid place-items-center">
-            <Bot className="h-4 w-4 text-white" />
-          </div>
-          <div>
-            <div className="text-xs font-semibold">Marketing Agent</div>
-            <div className="text-[10px] text-muted-foreground">Generating campaign…</div>
-          </div>
+        {/* Floating agent badges */}
+        <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity }} className="hidden lg:flex absolute left-8 top-1/3 z-10 glass-strong rounded-full px-4 py-2 items-center gap-2 shadow-elegant">
+          <Bot className="h-4 w-4 text-primary" />
+          <span className="text-xs font-medium">Marketing Agent running</span>
         </motion.div>
-        <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 4, repeat: Infinity, delay: 1 }} className="hidden lg:flex absolute right-8 top-1/2 z-10 glass-strong rounded-2xl px-4 py-3 items-center gap-3 shadow-elegant">
-          <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500 grid place-items-center">
-            <Sparkles className="h-4 w-4 text-white" />
-          </div>
-          <div>
-            <div className="text-xs font-semibold">+23% conversions</div>
-            <div className="text-[10px] text-muted-foreground">Autopilot active</div>
-          </div>
+        <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 4, repeat: Infinity, delay: 1 }} className="hidden lg:flex absolute right-8 bottom-1/3 z-10 glass-strong rounded-full px-4 py-2 items-center gap-2 shadow-elegant">
+          <Sparkles className="h-4 w-4 text-accent" />
+          <span className="text-xs font-medium">+23% conversions</span>
         </motion.div>
-        <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 5, repeat: Infinity, delay: 2 }} className="hidden lg:flex absolute right-12 bottom-32 z-10 glass-strong rounded-2xl px-4 py-3 items-center gap-3 shadow-elegant">
-          <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-pink-500 to-rose-500 grid place-items-center">
-            <Globe className="h-4 w-4 text-white" />
-          </div>
-          <div>
-            <div className="text-xs font-semibold">Site published</div>
-            <div className="text-[10px] text-muted-foreground">acme.founderos.ai</div>
-          </div>
-        </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 text-muted-foreground"
-        >
-          <ChevronDown className="h-6 w-6" />
-        </motion.div>
-      </section>
-
-      {/* 3D Showcase strip */}
-      <section className="relative h-[420px] overflow-hidden border-y border-border">
-        <div className="absolute inset-0 mesh-bg opacity-40" />
-        <Showcase3D />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background pointer-events-none" />
-        <div className="relative z-10 h-full container max-w-[1400px] px-4 lg:px-6 grid place-items-center text-center">
-          <div className="max-w-2xl">
-            <Badge variant="outline" className="rounded-full mb-4 backdrop-blur-md bg-card/50">Real-time 3D workspace</Badge>
-            <h2 className="font-display text-3xl sm:text-5xl font-bold tracking-tight">
-              Watch agents <span className="gradient-text">assemble your business</span>
-            </h2>
-            <p className="mt-4 text-muted-foreground">Brand, site, ads, and ops — orbiting in a unified 3D OS.</p>
-          </div>
-        </div>
       </section>
 
       {/* AI Agents */}
