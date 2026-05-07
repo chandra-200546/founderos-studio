@@ -82,127 +82,115 @@ export default function Landing() {
         </div>
       </header>
 
-      {/* Hero */}
-      <section ref={heroRef} className="relative pt-36 pb-32 overflow-hidden">
-        <div className="absolute inset-0 mesh-bg opacity-60" />
-        <div className="absolute inset-0 grid-pattern opacity-30 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)]" />
-        <motion.div style={{ y, opacity }} className="container max-w-[1400px] relative px-4 lg:px-6 text-center">
+      {/* Hero — 3D */}
+      <section ref={heroRef} className="relative min-h-[100vh] pt-32 pb-24 overflow-hidden">
+        <div className="absolute inset-0 mesh-bg opacity-70" />
+        <div className="absolute inset-0 grid-pattern opacity-20 [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_75%)]" />
+
+        {/* 3D Canvas — full bleed behind content */}
+        <div className="absolute inset-0 z-0">
+          <Hero3D />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background pointer-events-none" />
+        </div>
+
+        <motion.div style={{ y, opacity }} className="container max-w-[1400px] relative z-10 px-4 lg:px-6 text-center pointer-events-none">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <Badge variant="outline" className="rounded-full px-4 py-1.5 backdrop-blur-md bg-card/50 mb-6 gap-2">
+            <Badge variant="outline" className="rounded-full px-4 py-1.5 backdrop-blur-md bg-card/50 mb-6 gap-2 pointer-events-auto">
               <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse" />
-              <span className="text-xs">Now with 10 autonomous AI agents</span>
+              <span className="text-xs">Now with 10 autonomous AI agents · Powered by 3D OS</span>
             </Badge>
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="font-display font-bold text-4xl sm:text-6xl lg:text-7xl tracking-tight max-w-5xl mx-auto leading-[1.05]"
+            className="font-display font-bold text-4xl sm:text-6xl lg:text-8xl tracking-tight max-w-5xl mx-auto leading-[1.02]"
+            style={{ textShadow: "0 8px 40px hsl(var(--primary) / 0.35)" }}
           >
-            Build, Launch & Optimize <br className="hidden sm:block" />
-            Businesses with{" "}
-            <span className="gradient-text">Autonomous AI Agents</span>
+            Build Businesses<br className="hidden sm:block" />
+            in <span className="gradient-text">3D Reality</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="mt-6 text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto"
+            className="mt-6 text-base sm:text-xl text-muted-foreground max-w-2xl mx-auto backdrop-blur-sm"
           >
-            FounderOS researches markets, creates business plans, builds landing pages, generates marketing campaigns, and improves your business — automatically.
+            FounderOS deploys autonomous AI agents that research, design, build, launch, and optimize entire businesses — visually, in real time.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3"
+            className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 pointer-events-auto"
           >
             <Link to="/signup">
-              <Button size="lg" className="bg-gradient-aurora hover:opacity-90 text-white rounded-full shadow-elegant px-7 h-12 text-base">
-                Start Building <ArrowRight className="ml-2 h-4 w-4" />
+              <Button size="lg" className="bg-gradient-aurora hover:opacity-90 text-white rounded-full shadow-elegant px-8 h-14 text-base">
+                Enter the OS <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
-            <Button size="lg" variant="outline" className="rounded-full h-12 px-7 text-base backdrop-blur-md bg-card/50">
+            <Button size="lg" variant="outline" className="rounded-full h-14 px-8 text-base backdrop-blur-md bg-card/50">
               <Play className="mr-2 h-4 w-4" /> Watch Demo
             </Button>
           </motion.div>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="mt-6 text-xs text-muted-foreground">
-            No credit card needed · Free forever plan · Cancel anytime
+            Drag the scene · No credit card · Free forever plan
           </motion.div>
         </motion.div>
 
-        {/* Dashboard preview mockup */}
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
-          className="mt-16 relative max-w-6xl mx-auto px-4"
-        >
-          <div className="absolute -inset-x-20 -top-10 -bottom-10 bg-gradient-aurora opacity-20 blur-3xl rounded-full" />
-          <div className="relative rounded-2xl glass-strong shadow-elegant overflow-hidden ring-1 ring-border">
-            <div className="flex items-center gap-2 px-4 h-10 border-b border-border bg-muted/30">
-              <div className="h-3 w-3 rounded-full bg-destructive/60" />
-              <div className="h-3 w-3 rounded-full bg-warning/60" />
-              <div className="h-3 w-3 rounded-full bg-success/60" />
-              <div className="ml-4 text-xs text-muted-foreground font-mono">app.founderos.ai/dashboard</div>
-            </div>
-            <div className="p-6 grid grid-cols-12 gap-4">
-              <div className="col-span-3 hidden md:block">
-                <div className="h-4 w-20 rounded bg-muted mb-4" />
-                {[...Array(8)].map((_, i) => (
-                  <motion.div key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 + i * 0.05 }} className={cn("h-7 rounded-lg mb-1.5", i === 0 ? "bg-gradient-aurora/15 ring-1 ring-primary/30" : "bg-muted/50")} />
-                ))}
-              </div>
-              <div className="col-span-12 md:col-span-9 space-y-4">
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                  {[
-                    { label: "Active", value: "4", color: "from-violet-500 to-fuchsia-500" },
-                    { label: "AI Tasks", value: "1.2K", color: "from-blue-500 to-cyan-500" },
-                    { label: "Readiness", value: "78%", color: "from-emerald-500 to-teal-500" },
-                    { label: "Revenue", value: "$48K", color: "from-amber-500 to-orange-500" },
-                  ].map((s, i) => (
-                    <motion.div key={i} initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.7 + i * 0.08 }} className="rounded-xl border border-border p-3 bg-card/60 backdrop-blur">
-                      <div className={cn("h-1 w-8 rounded-full bg-gradient-to-r mb-2", s.color)} />
-                      <div className="text-[10px] text-muted-foreground uppercase tracking-wider">{s.label}</div>
-                      <div className="font-display font-bold text-lg">{s.value}</div>
-                    </motion.div>
-                  ))}
-                </div>
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
-                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }} className="lg:col-span-2 rounded-xl border border-border p-4 bg-card/60 h-44 relative overflow-hidden">
-                    <div className="text-xs text-muted-foreground mb-2">Performance</div>
-                    <svg viewBox="0 0 400 100" className="w-full h-24">
-                      <defs>
-                        <linearGradient id="line-grad" x1="0" x2="1">
-                          <stop offset="0%" stopColor="hsl(var(--primary))" />
-                          <stop offset="100%" stopColor="hsl(var(--accent))" />
-                        </linearGradient>
-                        <linearGradient id="area-grad" x1="0" x2="0" y1="0" y2="1">
-                          <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.4" />
-                          <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
-                        </linearGradient>
-                      </defs>
-                      <motion.path initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 2, delay: 1.2 }} d="M0,80 C50,75 80,50 120,55 C160,60 200,30 240,25 C280,20 320,40 360,15 L400,10" stroke="url(#line-grad)" strokeWidth="2.5" fill="none" />
-                      <path d="M0,80 C50,75 80,50 120,55 C160,60 200,30 240,25 C280,20 320,40 360,15 L400,10 L400,100 L0,100 Z" fill="url(#area-grad)" />
-                    </svg>
-                  </motion.div>
-                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.1 }} className="rounded-xl border border-border p-4 bg-card/60 flex items-center justify-center h-44">
-                    <ScoreRing score={87} label="Autopilot" />
-                  </motion.div>
-                </div>
-              </div>
-            </div>
+        {/* Floating glass cards over 3D */}
+        <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity }} className="hidden lg:flex absolute left-8 top-1/3 z-10 glass-strong rounded-2xl px-4 py-3 items-center gap-3 shadow-elegant">
+          <div className="h-8 w-8 rounded-lg bg-gradient-aurora grid place-items-center">
+            <Bot className="h-4 w-4 text-white" />
           </div>
-          {/* Floating agent badges */}
-          <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity }} className="hidden lg:flex absolute -left-6 top-1/3 glass-strong rounded-full px-4 py-2 items-center gap-2 shadow-elegant">
-            <Bot className="h-4 w-4 text-primary" />
-            <span className="text-xs font-medium">Marketing Agent running</span>
-          </motion.div>
-          <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 4, repeat: Infinity, delay: 1 }} className="hidden lg:flex absolute -right-6 bottom-1/4 glass-strong rounded-full px-4 py-2 items-center gap-2 shadow-elegant">
-            <Sparkles className="h-4 w-4 text-accent" />
-            <span className="text-xs font-medium">+23% conversions</span>
-          </motion.div>
+          <div>
+            <div className="text-xs font-semibold">Marketing Agent</div>
+            <div className="text-[10px] text-muted-foreground">Generating campaign…</div>
+          </div>
         </motion.div>
+        <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 4, repeat: Infinity, delay: 1 }} className="hidden lg:flex absolute right-8 top-1/2 z-10 glass-strong rounded-2xl px-4 py-3 items-center gap-3 shadow-elegant">
+          <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500 grid place-items-center">
+            <Sparkles className="h-4 w-4 text-white" />
+          </div>
+          <div>
+            <div className="text-xs font-semibold">+23% conversions</div>
+            <div className="text-[10px] text-muted-foreground">Autopilot active</div>
+          </div>
+        </motion.div>
+        <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 5, repeat: Infinity, delay: 2 }} className="hidden lg:flex absolute right-12 bottom-32 z-10 glass-strong rounded-2xl px-4 py-3 items-center gap-3 shadow-elegant">
+          <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-pink-500 to-rose-500 grid place-items-center">
+            <Globe className="h-4 w-4 text-white" />
+          </div>
+          <div>
+            <div className="text-xs font-semibold">Site published</div>
+            <div className="text-[10px] text-muted-foreground">acme.founderos.ai</div>
+          </div>
+        </motion.div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 text-muted-foreground"
+        >
+          <ChevronDown className="h-6 w-6" />
+        </motion.div>
+      </section>
+
+      {/* 3D Showcase strip */}
+      <section className="relative h-[420px] overflow-hidden border-y border-border">
+        <div className="absolute inset-0 mesh-bg opacity-40" />
+        <Showcase3D />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background pointer-events-none" />
+        <div className="relative z-10 h-full container max-w-[1400px] px-4 lg:px-6 grid place-items-center text-center">
+          <div className="max-w-2xl">
+            <Badge variant="outline" className="rounded-full mb-4 backdrop-blur-md bg-card/50">Real-time 3D workspace</Badge>
+            <h2 className="font-display text-3xl sm:text-5xl font-bold tracking-tight">
+              Watch agents <span className="gradient-text">assemble your business</span>
+            </h2>
+            <p className="mt-4 text-muted-foreground">Brand, site, ads, and ops — orbiting in a unified 3D OS.</p>
+          </div>
+        </div>
       </section>
 
       {/* AI Agents */}
