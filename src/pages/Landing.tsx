@@ -6,7 +6,7 @@ import {
   Layout, Megaphone, Filter, BarChart3, Zap, Check, Star, ChevronDown, Menu, Bot, Globe
 } from "lucide-react";
 import { Logo } from "@/components/Logo";
-import { Hero3D, Showcase3D } from "@/components/Hero3D";
+import { Hero3D, PageBackground3D, Step3D, Cta3D, TiltCard } from "@/components/Hero3D";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -48,7 +48,9 @@ export default function Landing() {
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden relative">
+      <PageBackground3D />
+      <div className="relative z-[1]">
       {/* Navbar */}
       <header className="fixed top-0 inset-x-0 z-50">
         <div className="container max-w-[1400px] px-4 lg:px-6">
@@ -164,18 +166,19 @@ export default function Landing() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.05 }}
-                  whileHover={{ y: -4 }}
                 >
-                  <Card className="group p-5 h-full glass border-border hover:shadow-elegant transition-all relative overflow-hidden">
-                    <div className={cn("absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gradient-to-br opacity-20 blur-2xl group-hover:opacity-40 transition", a.color)} />
-                    <div className="relative">
-                      <div className={cn("h-10 w-10 rounded-xl bg-gradient-to-br flex items-center justify-center mb-4", a.color)}>
-                        <Icon className="h-5 w-5 text-white" />
+                  <TiltCard intensity={10}>
+                    <Card className="group p-5 h-full glass border-border hover:shadow-elegant transition-all relative overflow-hidden">
+                      <div className={cn("absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gradient-to-br opacity-20 blur-2xl group-hover:opacity-40 transition", a.color)} />
+                      <div className="relative" style={{ transform: "translateZ(40px)" }}>
+                        <div className={cn("h-10 w-10 rounded-xl bg-gradient-to-br flex items-center justify-center mb-4 shadow-lg", a.color)}>
+                          <Icon className="h-5 w-5 text-white" />
+                        </div>
+                        <div className="font-display font-semibold mb-1">{a.name}</div>
+                        <div className="text-sm text-muted-foreground">{a.description}</div>
                       </div>
-                      <div className="font-display font-semibold mb-1">{a.name}</div>
-                      <div className="text-sm text-muted-foreground">{a.description}</div>
-                    </div>
-                  </Card>
+                    </Card>
+                  </TiltCard>
                 </motion.div>
               );
             })}
@@ -203,9 +206,10 @@ export default function Landing() {
                   <h3 className="font-display text-2xl font-semibold mb-2">{s.title}</h3>
                   <p className="text-muted-foreground">{s.desc}</p>
                 </div>
-                <div className="relative h-48 rounded-2xl glass shadow-card overflow-hidden grid place-items-center">
-                  <div className="absolute inset-0 mesh-bg opacity-50" />
-                  <div className="font-display font-bold text-7xl gradient-text relative">{s.n}</div>
+                <div className="relative h-56 rounded-2xl glass shadow-card overflow-hidden">
+                  <div className="absolute inset-0 mesh-bg opacity-40" />
+                  <Step3D index={i} />
+                  <div className="absolute bottom-3 right-4 font-display font-bold text-5xl gradient-text opacity-80 pointer-events-none">{s.n}</div>
                 </div>
                 <div className="hidden md:block absolute left-1/2 -translate-x-1/2 h-4 w-4 rounded-full bg-gradient-aurora ring-4 ring-background" />
               </motion.div>
@@ -223,13 +227,17 @@ export default function Landing() {
               const Icon = f.icon;
               return (
                 <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
-                  <Card className="p-8 glass border-border h-full hover:shadow-elegant transition-all">
-                    <div className="h-12 w-12 rounded-xl bg-gradient-aurora/10 ring-1 ring-primary/20 flex items-center justify-center mb-4">
-                      <Icon className="h-6 w-6 text-primary" />
-                    </div>
-                    <h3 className="font-display font-semibold text-xl mb-2">{f.title}</h3>
-                    <p className="text-muted-foreground">{f.desc}</p>
-                  </Card>
+                  <TiltCard intensity={8}>
+                    <Card className="p-8 glass border-border h-full hover:shadow-elegant transition-all">
+                      <div style={{ transform: "translateZ(50px)" }}>
+                        <div className="h-12 w-12 rounded-xl bg-gradient-aurora/10 ring-1 ring-primary/20 flex items-center justify-center mb-4 shadow-lg">
+                          <Icon className="h-6 w-6 text-primary" />
+                        </div>
+                        <h3 className="font-display font-semibold text-xl mb-2">{f.title}</h3>
+                        <p className="text-muted-foreground">{f.desc}</p>
+                      </div>
+                    </Card>
+                  </TiltCard>
                 </motion.div>
               );
             })}
@@ -280,30 +288,34 @@ export default function Landing() {
           <div className="grid md:grid-cols-3 gap-6 mt-12 max-w-5xl mx-auto">
             {plans.map((p, i) => (
               <motion.div key={p.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
-                <Card className={cn("relative p-8 h-full transition-all", p.highlight ? "glass-strong shadow-elegant ring-2 ring-primary/40 scale-[1.02]" : "glass border-border")}>
-                  {p.highlight && (
-                    <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-aurora text-white border-0 shadow-glow">Most popular</Badge>
-                  )}
-                  <div className="font-display font-semibold text-lg mb-1">{p.name}</div>
-                  <div className="text-sm text-muted-foreground mb-4">{p.description}</div>
-                  <div className="flex items-baseline gap-1 mb-6">
-                    <span className="font-display text-5xl font-bold">{p.price}</span>
-                    <span className="text-muted-foreground text-sm">{p.period}</span>
-                  </div>
-                  <ul className="space-y-3 mb-8">
-                    {p.features.map((f) => (
-                      <li key={f} className="flex items-start gap-2 text-sm">
-                        <Check className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                        <span>{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Link to="/signup" className="block">
-                    <Button className={cn("w-full rounded-full", p.highlight ? "bg-gradient-aurora text-white shadow-glow hover:opacity-90" : "")} variant={p.highlight ? "default" : "outline"}>
-                      {p.cta}
-                    </Button>
-                  </Link>
-                </Card>
+                <TiltCard intensity={p.highlight ? 14 : 9}>
+                  <Card className={cn("relative p-8 h-full transition-all", p.highlight ? "glass-strong shadow-elegant ring-2 ring-primary/40 scale-[1.02]" : "glass border-border")}>
+                    {p.highlight && (
+                      <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-aurora text-white border-0 shadow-glow" style={{ transform: "translate(-50%, 0) translateZ(60px)" }}>Most popular</Badge>
+                    )}
+                    <div style={{ transform: "translateZ(40px)" }}>
+                      <div className="font-display font-semibold text-lg mb-1">{p.name}</div>
+                      <div className="text-sm text-muted-foreground mb-4">{p.description}</div>
+                      <div className="flex items-baseline gap-1 mb-6">
+                        <span className="font-display text-5xl font-bold">{p.price}</span>
+                        <span className="text-muted-foreground text-sm">{p.period}</span>
+                      </div>
+                      <ul className="space-y-3 mb-8">
+                        {p.features.map((f) => (
+                          <li key={f} className="flex items-start gap-2 text-sm">
+                            <Check className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                            <span>{f}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <Link to="/signup" className="block">
+                        <Button className={cn("w-full rounded-full", p.highlight ? "bg-gradient-aurora text-white shadow-glow hover:opacity-90" : "")} variant={p.highlight ? "default" : "outline"}>
+                          {p.cta}
+                        </Button>
+                      </Link>
+                    </div>
+                  </Card>
+                </TiltCard>
               </motion.div>
             ))}
           </div>
@@ -317,19 +329,23 @@ export default function Landing() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mt-12">
             {testimonials.map((t, i) => (
               <motion.div key={t.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}>
-                <Card className="p-6 glass border-border h-full">
-                  <div className="flex gap-0.5 mb-3">
-                    {[...Array(5)].map((_, i) => <Star key={i} className="h-3.5 w-3.5 fill-warning text-warning" />)}
-                  </div>
-                  <p className="text-sm leading-relaxed mb-4">"{t.quote}"</p>
-                  <div className="flex items-center gap-3 pt-4 border-t border-border">
-                    <div className="h-9 w-9 rounded-full bg-gradient-aurora flex items-center justify-center text-white text-xs font-semibold">{t.avatar}</div>
-                    <div>
-                      <div className="font-medium text-sm">{t.name}</div>
-                      <div className="text-xs text-muted-foreground">{t.role}</div>
+                <TiltCard intensity={10}>
+                  <Card className="p-6 glass border-border h-full">
+                    <div style={{ transform: "translateZ(30px)" }}>
+                      <div className="flex gap-0.5 mb-3">
+                        {[...Array(5)].map((_, i) => <Star key={i} className="h-3.5 w-3.5 fill-warning text-warning" />)}
+                      </div>
+                      <p className="text-sm leading-relaxed mb-4">"{t.quote}"</p>
+                      <div className="flex items-center gap-3 pt-4 border-t border-border">
+                        <div className="h-9 w-9 rounded-full bg-gradient-aurora flex items-center justify-center text-white text-xs font-semibold">{t.avatar}</div>
+                        <div>
+                          <div className="font-medium text-sm">{t.name}</div>
+                          <div className="text-xs text-muted-foreground">{t.role}</div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </Card>
+                  </Card>
+                </TiltCard>
               </motion.div>
             ))}
           </div>
@@ -354,16 +370,20 @@ export default function Landing() {
       {/* CTA */}
       <section className="py-24">
         <div className="container max-w-[1400px] px-4 lg:px-6">
-          <Card className="relative overflow-hidden glass-strong border-border p-12 lg:p-20 text-center">
+          <Card className="relative overflow-hidden glass-strong border-border p-12 lg:p-20 text-center min-h-[420px]">
             <div className="absolute inset-0 mesh-bg" />
-            <div className="relative">
-              <h2 className="font-display text-3xl lg:text-5xl font-bold tracking-tight mb-4 max-w-3xl mx-auto">
+            <div className="absolute inset-0 opacity-70">
+              <Cta3D />
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background/60 pointer-events-none" />
+            <div className="relative pointer-events-none">
+              <h2 className="font-display text-3xl lg:text-5xl font-bold tracking-tight mb-4 max-w-3xl mx-auto" style={{ textShadow: "0 6px 30px hsl(var(--primary) / 0.4)" }}>
                 Your next business is <span className="gradient-text">one prompt away.</span>
               </h2>
               <p className="text-muted-foreground text-lg mb-8 max-w-xl mx-auto">
                 Stop planning. Start shipping. Let autonomous AI agents do the work.
               </p>
-              <Link to="/signup">
+              <Link to="/signup" className="pointer-events-auto inline-block">
                 <Button size="lg" className="bg-gradient-aurora text-white rounded-full shadow-elegant px-7 h-12">
                   Start Building Free <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
@@ -400,6 +420,7 @@ export default function Landing() {
           </div>
         </div>
       </footer>
+      </div>
     </div>
   );
 }
