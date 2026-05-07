@@ -205,9 +205,10 @@ export default function Landing() {
                   <h3 className="font-display text-2xl font-semibold mb-2">{s.title}</h3>
                   <p className="text-muted-foreground">{s.desc}</p>
                 </div>
-                <div className="relative h-48 rounded-2xl glass shadow-card overflow-hidden grid place-items-center">
-                  <div className="absolute inset-0 mesh-bg opacity-50" />
-                  <div className="font-display font-bold text-7xl gradient-text relative">{s.n}</div>
+                <div className="relative h-56 rounded-2xl glass shadow-card overflow-hidden">
+                  <div className="absolute inset-0 mesh-bg opacity-40" />
+                  <Step3D index={i} />
+                  <div className="absolute bottom-3 right-4 font-display font-bold text-5xl gradient-text opacity-80 pointer-events-none">{s.n}</div>
                 </div>
                 <div className="hidden md:block absolute left-1/2 -translate-x-1/2 h-4 w-4 rounded-full bg-gradient-aurora ring-4 ring-background" />
               </motion.div>
